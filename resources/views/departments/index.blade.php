@@ -133,20 +133,47 @@
                 .then(() => {
                     deptModal.hide();
                     loadDepartments();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data departemen berhasil disimpan.',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
                 })
                 .catch(() => {});
         });
 
         window.deleteDept = function(id) {
-            if (confirm('Yakin ingin menghapus departemen ini?')) {
-                fetch(`/departemen/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    })
-                    .then(() => loadDepartments());
-            }
+            Swal.fire({
+                title: 'Yakin ingin menghapus?',
+                text: "Data departemen akan dihapus permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/departemen/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            }
+                        })
+                        .then(() => {
+                            loadDepartments();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Terhapus!',
+                                text: 'Data departemen berhasil dihapus.',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        });
+                }
+            });
         }
     </script>
 @endsection

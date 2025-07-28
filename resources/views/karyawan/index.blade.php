@@ -1,4 +1,3 @@
-// filepath: resources/views/karyawan/index.blade.php
 @extends('layouts.main')
 
 @section('content')
@@ -174,20 +173,47 @@
                 .then(() => {
                     karyawanModal.hide();
                     loadKaryawan();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data karyawan berhasil disimpan.',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
                 })
                 .catch(() => {});
         });
 
         window.deleteKaryawan = function(id) {
-            if (confirm('Yakin ingin menghapus karyawan ini?')) {
-                fetch(`/karyawan/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    })
-                    .then(() => loadKaryawan());
-            }
+            Swal.fire({
+                title: 'Yakin ingin menghapus?',
+                text: "Data karyawan akan dihapus permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/karyawan/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            }
+                        })
+                        .then(() => {
+                            loadKaryawan();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Terhapus!',
+                                text: 'Data karyawan berhasil dihapus.',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        });
+                }
+            });
         }
     </script>
 @endsection

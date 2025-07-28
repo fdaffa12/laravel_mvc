@@ -1,3 +1,6 @@
+--masuk ke myqsl root dahulu
+mysql -u root -p
+
 -- (opsional) Buat database jika belum ada
 CREATE DATABASE IF NOT EXISTS ujump_202507;
 

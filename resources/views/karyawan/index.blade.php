@@ -14,7 +14,7 @@
                     <tr>
                         <th style="width:60px;">#</th>
                         <th>NIK</th>
-                        <th>Nama</th>
+                        <th>Nama Karyawan</th>
                         <th>Departemen</th>
                         <th>Shift</th>
                         <th style="width:160px;">Aksi</th>

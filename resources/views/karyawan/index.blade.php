@@ -39,7 +39,7 @@
                     <div class="modal-body">
                         <input type="hidden" id="karyawan_id">
                         <div class="mb-3">
-                            <label class="form-label">Nama</label>
+                            <label class="form-label">Nama Karyawan</label>
                             <input type="text" class="form-control" id="nama" required>
                             <div class="invalid-feedback" id="nama_error"></div>
                         </div>

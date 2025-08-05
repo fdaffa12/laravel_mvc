@@ -29,8 +29,13 @@ class KaryawanController extends Controller
         ]);
 
         // Generate NIK otomatis
+        // Ambil data karyawan terakhir berdasarkan id terbesar
         $last = Karyawan::orderByDesc('id')->first();
+
+        // Jika ada data, ambil 2 digit terakhir dari NIK lalu tambah 1, jika tidak ada mulai dari 1
         $nextNumber = $last ? ((int) substr($last->nik, 4)) + 1 : 1;
+
+        // Buat NIK baru dengan format: 2025 + nomor urut 2 digit (misal: 202501, 202502, dst)
         $nik = '2025' . str_pad($nextNumber, 2, '0', STR_PAD_LEFT);
 
         $karyawan = Karyawan::create([

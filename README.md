@@ -1,6 +1,9 @@
 --masuk ke myqsl root dahulu
 mysql -u root -p
 
+mysql -u ujump_202507 -p
+"P4ssword\*$#123456"
+
 -- (opsional) Buat database jika belum ada
 CREATE DATABASE IF NOT EXISTS ujump_202507;
 
